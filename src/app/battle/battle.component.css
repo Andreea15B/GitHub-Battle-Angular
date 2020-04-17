@@ -1,0 +1,79 @@
+.players {
+    margin: 30px 350px;
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba(11, 13, 24, 0.6);
+    border-radius: 20px;
+}
+
+#battle-btn-div {
+    text-align: center;
+}
+
+.userInfo {
+    text-align: center;
+}
+
+.avatar {
+    width: 30%;
+    margin-top: 20px;
+    border-radius: 25px;
+}
+
+.winner {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    font-size: 45px;
+    color: white;
+}
+
+.playerBox {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    padding: 30px 30px;
+}
+
+.forCorners {
+    border-radius: 20px;
+    flex-grow: 1;
+    min-width: 50%;
+}
+
+label {
+    color: white;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+input, #battle-btn {
+    border: none;
+    border-radius: 20px;
+    padding: 13px 20px;
+    font-weight: 600;
+}
+
+input[type=submit] {
+    color: white;
+}
+
+input:not([type=submit]) {
+    color: black;
+}
+
+input[type=submit], #battle-btn {
+    background-color: #188c6c;
+}
+
+#battle-btn {
+    width: 9%;
+    color: white;
+}
+
+p, h3 {
+    color: white;
+}
+
+.player-input {
+    margin: 15%;
+}

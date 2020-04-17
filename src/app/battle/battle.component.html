@@ -1,0 +1,57 @@
+<div class="players">
+    <div class="forCorners" [ngStyle]="{'background-color': buttonColor1}">
+        <div class="playerBox">
+            <div *ngIf="!gotPlayerOne" class="player-input">
+
+                <form (submit)="getPlayerOne()">
+                    <label>Player 1</label>
+                    <br><br>
+                    <input type="text" name="pOne" required placeholder="GitHub username" [(ngModel)]="playerOneUsername">
+                    <br><br>
+                    <input type="submit" value="Load User">
+                </form>
+
+            </div>
+
+            <div *ngIf="gotPlayerOne" class="userInfo">
+                <img src={{playerOneInfo.avatar_url}} class="avatar">
+                <h3>{{playerOneInfo.name}}</h3>
+                <p>Username: {{playerOneInfo.login}}</p>
+                <p *ngIf="in_battle==true">Followers: {{playerOneInfo.followers}}</p>
+                <p *ngIf="in_battle==true">Public repositories: {{playerOneInfo.public_repos}}</p>
+                <p *ngIf="in_battle==true">Score: {{ player1_score }}</p>
+            </div>
+            <div *ngIf="winner==1" class="winner">WINNER</div>
+        </div>
+    </div>
+
+    <div class="forCorners" [ngStyle]="{'background-color': buttonColor2}">
+        <div class="playerBox">
+            <div *ngIf="!gotPlayerTwo" class="player-input">
+
+                <form (submit)="getPlayerTwo()">
+                    <label>Player 2</label>
+                    <br><br>
+                    <input type="text" name="pTwo" required placeholder="GitHub username" [(ngModel)]="playerTwoUsername">
+                    <br><br>
+                    <input type="submit" value="Load User">
+                </form>
+
+            </div>
+
+            <div *ngIf="gotPlayerTwo" class="userInfo">
+                <img src={{playerTwoInfo.avatar_url}} class="avatar">
+                <h3>{{playerTwoInfo.name}}</h3>
+                <p>Username: {{playerTwoInfo.login}}</p>
+                <p *ngIf="in_battle==true">Followers: {{playerTwoInfo.followers}}</p>
+                <p *ngIf="in_battle==true">Public repositories: {{playerTwoInfo.public_repos}}</p>
+                <p *ngIf="in_battle==true">Score: {{ player2_score }}</p>
+            </div>
+            <div *ngIf="winner==2" class="winner">WINNER</div>
+        </div>
+    </div>
+</div>
+
+<div id="battle-btn-div">
+    <button id="battle-btn" *ngIf="playerOneInfo && playerTwoInfo" (click)="battle()">Battle!</button>
+</div>

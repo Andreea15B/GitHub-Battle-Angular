@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "my-git-battle"
+    }
+  },
+  "defaultProject": "my-git-battle",
+  "cli": {
+    "analytics": "8f7a6950-4fe9-4bfe-beca-aae68ccc1a50"
+  }
 }
