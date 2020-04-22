@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IUser } from '../models/user.model';
 import { tap, delay } from 'rxjs/operators';
+import { __values } from 'tslib';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class GithubService {
 
   getUserOne(username) {
     this.isLoading1$.next(true);
-    return this.http.get<IUser[]>(`https://api.github.com/users/${username}`)
+    this.http.get(`https://api.github.com/users/${username}`)
     .pipe(
       delay(500),
       tap(() => this.isLoading1$.next(false))
@@ -28,7 +29,7 @@ export class GithubService {
       },
       (err) => {
         console.log("Error in user1 service: ", err)
-        this.playerOneInfo = null;
+        this.playerOneInfo.next(err);
       }
     );
   }
@@ -47,7 +48,7 @@ export class GithubService {
       },
       (err) => {
         console.log("Error in user2 service: ", err)
-        this.playerOneInfo = null;
+        this.playerTwoInfo.next(err);
       }
     )
   }

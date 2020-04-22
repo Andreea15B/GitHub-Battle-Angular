@@ -15,9 +15,11 @@
 
             <ng-container *ngIf="!isLoading1; else loadingState">
                 <div *ngIf="gotPlayerOne" class="userInfo">
-                    <img src={{playerOneInfo.avatar_url}} class="avatar">
-                    <h3>{{playerOneInfo.name}}</h3>
-                    <p>Username: {{playerOneInfo.login}}</p>
+                    <ng-container *ngIf="!errorUser1; else errorMessage1">
+                        <img src={{playerOneInfo.avatar_url}} class="avatar">
+                        <h3>{{playerOneInfo.name}}</h3>
+                        <p>Username: {{playerOneInfo.login}}</p>
+                    </ng-container>
                     <button *ngIf="in_battle==false" class="battle-btn" (click)="resetFirstUser()">Reset</button>
                     <p *ngIf="in_battle==true">Followers: {{playerOneInfo.followers}}</p>
                     <p *ngIf="in_battle==true">Public repositories: {{playerOneInfo.public_repos}}</p>
@@ -29,6 +31,14 @@
             <ng-template #loadingState>
                 <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
             </ng-template>
+
+            <ng-template #errorMessage1>
+                <div class="errorMessage">
+                    <h3 style="font-family: 'Josefin Sans', sans-serif;">ERROR:</h3>
+                    <p>Username {{ playerOneUsername }} doesn't exist!</p>
+                </div>
+            </ng-template>
+
         </div>
     </div>
 
@@ -48,9 +58,11 @@
 
             <ng-container *ngIf="!isLoading2; else loadingState">
                 <div *ngIf="gotPlayerTwo" class="userInfo">
-                    <img src={{playerTwoInfo.avatar_url}} class="avatar">
-                    <h3>{{playerTwoInfo.name}}</h3>
-                    <p>Username: {{playerTwoInfo.login}}</p>
+                    <ng-container *ngIf="!errorUser2; else errorMessage2">
+                        <img src={{playerTwoInfo.avatar_url}} class="avatar">
+                        <h3>{{playerTwoInfo.name}}</h3>
+                        <p>Username: {{playerTwoInfo.login}}</p>
+                    </ng-container>
                     <button *ngIf="in_battle==false" class="battle-btn" (click)="resetSecondUser()">Reset</button>
                     <p *ngIf="in_battle==true">Followers: {{playerTwoInfo.followers}}</p>
                     <p *ngIf="in_battle==true">Public repositories: {{playerTwoInfo.public_repos}}</p>
@@ -58,6 +70,14 @@
                 </div>
                 <div *ngIf="winner==2" class="winner">WINNER</div>
             </ng-container>
+
+            <ng-template #errorMessage2>
+                <div class="errorMessage">
+                    <h3 style="font-family: 'Josefin Sans', sans-serif;">ERROR:</h3>
+                    <p>Username {{ playerTwoUsername }} doesn't exist!</p>
+                </div>
+            </ng-template>
+
         </div>
     </div>
 </div>

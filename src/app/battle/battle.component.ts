@@ -12,8 +12,8 @@ import { Subscription } from 'rxjs';
 export class BattleComponent implements OnInit {
     playerOneUsername: string;
     playerTwoUsername: string;
-    playerOneInfo: IUser = null;
-    playerTwoInfo: IUser = null;
+    playerOneInfo: any = null;
+    playerTwoInfo: any = null;
     player1_score: number;
     player2_score: number;
     gotPlayerOne = false;
@@ -26,17 +26,38 @@ export class BattleComponent implements OnInit {
     subscription2: Subscription;
     public isLoading1: boolean = false;
     public isLoading2: boolean = false;
+    errorUser1: boolean = false;
+    errorUser2: boolean = false;
 
     constructor(private githubService: GithubService) {}
 
     ngOnInit(): void {
+        
         this.githubService.playerOneInfo.subscribe((user) => {
+            this.gotPlayerOne = false;
             this.playerOneInfo = user;
+            if(this.playerOneInfo.length != 0) {
+                this.gotPlayerOne = true;
+                this.errorUser1 = false;
+            }
+            if(this.playerOneInfo.status == 404) {
+                this.errorUser1 = true;
+                this.isLoading1 = false;
+            }
             this.player1_score = (this.playerOneInfo.followers + this.playerOneInfo.public_repos)*12;
         });
 
         this.githubService.playerTwoInfo.subscribe((user) => {
+            this.gotPlayerTwo = false;
             this.playerTwoInfo = user;
+            if(this.playerTwoInfo.length != 0) {
+                this.gotPlayerTwo = true;
+                this.errorUser2 = false;
+            }
+            if(this.playerTwoInfo.status == 404) {
+                this.errorUser2 = true;
+                this.isLoading2 = false;
+            }
             this.player2_score = (this.playerTwoInfo.followers + this.playerTwoInfo.public_repos)*12;
         });
 
@@ -50,7 +71,6 @@ export class BattleComponent implements OnInit {
 
     getPlayerOne() {
         this.githubService.getUserOne(this.playerOneUsername);
-        console.log(this.playerOneInfo);
         if(this.playerOneInfo) {
           this.gotPlayerOne = true;
         }
@@ -58,7 +78,7 @@ export class BattleComponent implements OnInit {
     
     getPlayerTwo() {
         this.githubService.getUserTwo(this.playerTwoUsername);
-        if(this.playerOneInfo) {
+        if(this.playerTwoInfo) {
             this.gotPlayerTwo = true;
         }
     }

@@ -88,3 +88,7 @@ p, h3 {
     stroke: white;
     margin: 20% 30% 10% 10%;
 }
+
+.errorMessage {
+    margin: 4.2em 1.6em 2.2em;
+}
