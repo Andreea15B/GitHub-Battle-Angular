@@ -47,7 +47,7 @@ label {
     font-family: 'Josefin Sans', sans-serif;
 }
 
-input, #battle-btn {
+input, .battle-btn {
     border: none;
     border-radius: 20px;
     padding: 13px 20px;
@@ -62,13 +62,18 @@ input:not([type=submit]) {
     color: black;
 }
 
-input[type=submit], #battle-btn {
+input[type=submit], .battle-btn {
     background-color: #188c6c;
 }
 
-#battle-btn {
-    width: 9%;
+input[type=submit]:hover, .battle-btn:hover {
+    cursor: pointer;
+    background-color: #0e523f;
+}
+
+.battle-btn {
     color: white;
+    margin-right: 1%;
 }
 
 p, h3 {

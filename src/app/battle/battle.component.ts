@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GithubService } from '../services/github.service';
-import { Router } from '@angular/router';
 import { IUser } from '../models/user.model';
 import { Subscription } from 'rxjs';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
     selector: 'app-battle',
@@ -29,7 +27,7 @@ export class BattleComponent implements OnInit {
     public isLoading1: boolean = false;
     public isLoading2: boolean = false;
 
-    constructor(private githubService: GithubService, private router: Router) {}
+    constructor(private githubService: GithubService) {}
 
     ngOnInit(): void {
         this.githubService.playerOneInfo.subscribe((user) => {
@@ -80,5 +78,13 @@ export class BattleComponent implements OnInit {
 
     refresh(): void {
         window.location.reload();
+    }
+
+    resetFirstUser() : void {
+        this.gotPlayerOne = false;
+    }
+
+    resetSecondUser() : void {
+        this.gotPlayerTwo = false;
     }
 }
