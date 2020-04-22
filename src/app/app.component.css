@@ -4,4 +4,10 @@ header {
 
 .app-title {
     text-align: center;
+	color: #343434;
+	text-transform: uppercase;
+	font-family: 'Orienta', sans-serif;
+	letter-spacing: 3px;
+	font-style: italic;
+	text-shadow: 2px 5px 0 rgba(0,0,0,0.2);
 }

@@ -13,15 +13,21 @@
 
             </div>
 
-            <div *ngIf="gotPlayerOne" class="userInfo">
-                <img src={{playerOneInfo.avatar_url}} class="avatar">
-                <h3>{{playerOneInfo.name}}</h3>
-                <p>Username: {{playerOneInfo.login}}</p>
-                <p *ngIf="in_battle==true">Followers: {{playerOneInfo.followers}}</p>
-                <p *ngIf="in_battle==true">Public repositories: {{playerOneInfo.public_repos}}</p>
-                <p *ngIf="in_battle==true">Score: {{ player1_score }}</p>
-            </div>
-            <div *ngIf="winner==1" class="winner">WINNER</div>
+            <ng-container *ngIf="!isLoading1; else loadingState">
+                <div *ngIf="gotPlayerOne" class="userInfo">
+                    <img src={{playerOneInfo.avatar_url}} class="avatar">
+                    <h3>{{playerOneInfo.name}}</h3>
+                    <p>Username: {{playerOneInfo.login}}</p>
+                    <p *ngIf="in_battle==true">Followers: {{playerOneInfo.followers}}</p>
+                    <p *ngIf="in_battle==true">Public repositories: {{playerOneInfo.public_repos}}</p>
+                    <p *ngIf="in_battle==true">Score: {{ player1_score }}</p>
+                </div>
+                <div *ngIf="winner==1" class="winner">WINNER</div>
+            </ng-container>
+
+            <ng-template #loadingState>
+                <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+            </ng-template>
         </div>
     </div>
 
@@ -39,15 +45,17 @@
 
             </div>
 
-            <div *ngIf="gotPlayerTwo" class="userInfo">
-                <img src={{playerTwoInfo.avatar_url}} class="avatar">
-                <h3>{{playerTwoInfo.name}}</h3>
-                <p>Username: {{playerTwoInfo.login}}</p>
-                <p *ngIf="in_battle==true">Followers: {{playerTwoInfo.followers}}</p>
-                <p *ngIf="in_battle==true">Public repositories: {{playerTwoInfo.public_repos}}</p>
-                <p *ngIf="in_battle==true">Score: {{ player2_score }}</p>
-            </div>
-            <div *ngIf="winner==2" class="winner">WINNER</div>
+            <ng-container *ngIf="!isLoading2; else loadingState">
+                <div *ngIf="gotPlayerTwo" class="userInfo">
+                    <img src={{playerTwoInfo.avatar_url}} class="avatar">
+                    <h3>{{playerTwoInfo.name}}</h3>
+                    <p>Username: {{playerTwoInfo.login}}</p>
+                    <p *ngIf="in_battle==true">Followers: {{playerTwoInfo.followers}}</p>
+                    <p *ngIf="in_battle==true">Public repositories: {{playerTwoInfo.public_repos}}</p>
+                    <p *ngIf="in_battle==true">Score: {{ player2_score }}</p>
+                </div>
+                <div *ngIf="winner==2" class="winner">WINNER</div>
+            </ng-container>
         </div>
     </div>
 </div>

@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { GithubService } from '../services/github.service';
 import { Router } from '@angular/router';
 import { IUser } from '../models/user.model';
+import { Subscription } from 'rxjs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
     selector: 'app-battle',
@@ -22,6 +24,10 @@ export class BattleComponent implements OnInit {
     buttonColor1: string = 'rgb(255, 255, 255, 0)';
     buttonColor2: string = 'rgb(255, 255, 255, 0)';
     in_battle: boolean = false;
+    subscription1: Subscription;
+    subscription2: Subscription;
+    public isLoading1: boolean = false;
+    public isLoading2: boolean = false;
 
     constructor(private githubService: GithubService, private router: Router) {}
 
@@ -34,6 +40,13 @@ export class BattleComponent implements OnInit {
         this.githubService.playerTwoInfo.subscribe((user) => {
             this.playerTwoInfo = user;
             this.player2_score = (this.playerTwoInfo.followers + this.playerTwoInfo.public_repos)*12;
+        });
+
+        this.githubService.isLoading1$.subscribe((loading: boolean) => {
+            this.isLoading1 = loading;
+        });
+        this.githubService.isLoading2$.subscribe((loading: boolean) => {
+            this.isLoading2 = loading;
         });
     }
 

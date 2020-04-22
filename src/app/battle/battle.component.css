@@ -44,6 +44,7 @@ label {
     color: white;
     font-size: 30px;
     font-weight: 500;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 input, #battle-btn {
@@ -76,4 +77,9 @@ p, h3 {
 
 .player-input {
     margin: 15%;
+}
+
+.mat-progress-spinner {
+    stroke: white;
+    margin: 20% 30% 10% 10%;
 }
