@@ -77,4 +77,8 @@ export class BattleComponent implements OnInit {
         }
         else this.winner = 3;
     }
+
+    refresh(): void {
+        window.location.reload();
+    }
 }

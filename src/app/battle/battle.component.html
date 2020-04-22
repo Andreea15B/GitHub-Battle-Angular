@@ -61,5 +61,6 @@
 </div>
 
 <div id="battle-btn-div">
-    <button id="battle-btn" *ngIf="playerOneInfo && playerTwoInfo" (click)="battle()">Battle!</button>
+    <button id="battle-btn" *ngIf="gotPlayerOne && gotPlayerTwo && in_battle==false" (click)="battle()">Battle!</button>
+    <button id="battle-btn" *ngIf="in_battle==true" (click)="refresh()">Battle again!</button>
 </div>
