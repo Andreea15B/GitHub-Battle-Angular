@@ -5,4 +5,5 @@ export interface IUser {
     public_repos: number;
     followers: number;
     avatar_url: string;
+    status: number;
 }

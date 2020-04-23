@@ -1,7 +1,7 @@
 <div class="players">
     <div class="forCorners" [ngStyle]="{'background-color': buttonColor1}">
         <div class="playerBox">
-            <div *ngIf="!gotPlayerOne" class="player-input">
+            <div *ngIf="!gotPlayerOne && !isLoading1 && !errorUser1" class="player-input">
 
                 <form (submit)="getPlayerOne()">
                     <label>Player 1</label>
@@ -14,17 +14,17 @@
             </div>
 
             <ng-container *ngIf="!isLoading1; else loadingState">
-                <div *ngIf="gotPlayerOne" class="userInfo">
-                    <ng-container *ngIf="!errorUser1; else errorMessage1">
+                <ng-container *ngIf="!errorUser1; else errorMessage1">
+                    <div *ngIf="gotPlayerOne" class="userInfo">
                         <img src={{playerOneInfo.avatar_url}} class="avatar">
                         <h3>{{playerOneInfo.name}}</h3>
                         <p>Username: {{playerOneInfo.login}}</p>
-                    </ng-container>
-                    <button *ngIf="in_battle==false" class="battle-btn" (click)="resetFirstUser()">Reset</button>
-                    <p *ngIf="in_battle==true">Followers: {{playerOneInfo.followers}}</p>
-                    <p *ngIf="in_battle==true">Public repositories: {{playerOneInfo.public_repos}}</p>
-                    <p *ngIf="in_battle==true">Score: {{ player1_score }}</p>
-                </div>
+                        <button *ngIf="in_battle==false" class="battle-btn" (click)="resetFirstUser()">Reset</button>
+                        <p *ngIf="in_battle==true">Followers: {{playerOneInfo.followers}}</p>
+                        <p *ngIf="in_battle==true">Public repositories: {{playerOneInfo.public_repos}}</p>
+                        <p *ngIf="in_battle==true">Score: {{ player1_score }}</p>
+                    </div>
+                </ng-container>
                 <div *ngIf="winner==1" class="winner">WINNER</div>
             </ng-container>
 
@@ -36,6 +36,7 @@
                 <div class="errorMessage">
                     <h3 style="font-family: 'Josefin Sans', sans-serif;">ERROR:</h3>
                     <p>Username {{ playerOneUsername }} doesn't exist!</p>
+                    <button class="battle-btn" (click)="resetFirstUser()">Reset</button>
                 </div>
             </ng-template>
 
@@ -44,7 +45,7 @@
 
     <div class="forCorners" [ngStyle]="{'background-color': buttonColor2}">
         <div class="playerBox">
-            <div *ngIf="!gotPlayerTwo" class="player-input">
+            <div *ngIf="!gotPlayerTwo && !isLoading2 && !errorUser2" class="player-input">
 
                 <form (submit)="getPlayerTwo()">
                     <label>Player 2</label>
@@ -57,17 +58,19 @@
             </div>
 
             <ng-container *ngIf="!isLoading2; else loadingState">
-                <div *ngIf="gotPlayerTwo" class="userInfo">
-                    <ng-container *ngIf="!errorUser2; else errorMessage2">
+                <ng-container *ngIf="!errorUser2; else errorMessage2">
+                    <div *ngIf="gotPlayerTwo" class="userInfo">
+    
                         <img src={{playerTwoInfo.avatar_url}} class="avatar">
                         <h3>{{playerTwoInfo.name}}</h3>
                         <p>Username: {{playerTwoInfo.login}}</p>
-                    </ng-container>
-                    <button *ngIf="in_battle==false" class="battle-btn" (click)="resetSecondUser()">Reset</button>
-                    <p *ngIf="in_battle==true">Followers: {{playerTwoInfo.followers}}</p>
-                    <p *ngIf="in_battle==true">Public repositories: {{playerTwoInfo.public_repos}}</p>
-                    <p *ngIf="in_battle==true">Score: {{ player2_score }}</p>
-                </div>
+                        <button *ngIf="in_battle==false" class="battle-btn" (click)="resetSecondUser()">Reset</button>
+                        <p *ngIf="in_battle==true">Followers: {{playerTwoInfo.followers}}</p>
+                        <p *ngIf="in_battle==true">Public repositories: {{playerTwoInfo.public_repos}}</p>
+                        <p *ngIf="in_battle==true">Score: {{ player2_score }}</p>
+
+                    </div>
+                </ng-container>
                 <div *ngIf="winner==2" class="winner">WINNER</div>
             </ng-container>
 
@@ -75,6 +78,7 @@
                 <div class="errorMessage">
                     <h3 style="font-family: 'Josefin Sans', sans-serif;">ERROR:</h3>
                     <p>Username {{ playerTwoUsername }} doesn't exist!</p>
+                    <button class="battle-btn" (click)="resetSecondUser()">Reset</button>
                 </div>
             </ng-template>
 
