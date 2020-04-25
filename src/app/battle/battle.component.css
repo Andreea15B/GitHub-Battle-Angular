@@ -25,6 +25,8 @@
     transform: rotate(180deg);
     font-size: 45px;
     color: white;
+    letter-spacing: 5px;
+    align-self: center;
 }
 
 .playerBox {

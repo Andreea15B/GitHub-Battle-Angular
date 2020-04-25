@@ -43,6 +43,8 @@
         </div>
     </div>
 
+    <div *ngIf="winner==3" class="winner">DRAW</div>
+
     <div class="forCorners" [ngStyle]="{'background-color': buttonColor2}">
         <div class="playerBox">
             <div *ngIf="!gotPlayerTwo && !isLoading2 && !errorUser2" class="player-input">
