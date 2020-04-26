@@ -28,11 +28,12 @@ export class BattleComponent implements OnInit {
     isLoading2: boolean = false;
     errorUser1: boolean = false;
     errorUser2: boolean = false;
+    repoNames1: string[] = [];
+    repoNames2: string[] = [];
 
     constructor(private githubService: GithubService) {}
 
     ngOnInit(): void {
-
         this.subscription1 = this.githubService.isLoading1$.subscribe((loading: boolean) => {
             this.isLoading1 = loading;
         });
@@ -50,6 +51,7 @@ export class BattleComponent implements OnInit {
                     this.errorUser1 = false;
                 }
                 this.player1_score = (this.playerOneInfo.followers + this.playerOneInfo.public_repos)*12;
+                this.getRepos(this.playerOneUsername, this.repoNames1);
             },
             error => {
                 this.errorUser1 = true;
@@ -67,11 +69,24 @@ export class BattleComponent implements OnInit {
                     this.errorUser2 = false;
                 }
                 this.player2_score = (this.playerTwoInfo.followers + this.playerTwoInfo.public_repos)*12;
+                this.getRepos(this.playerTwoUsername, this.repoNames2);
             },
             error => {
                 this.errorUser2 = true;
                 this.isLoading2 = false;
                 this.gotPlayerTwo = false;
+            });
+    }
+
+    public getRepos(username: string, repoNamesArray: string[]) {
+        this.githubService.getRepos(username)
+            .subscribe((res: any) => {
+                console.log("res: ", res);
+                for(let repo_details of res) {
+                    console.log("repo_details: ", repo_details);
+                    console.log("repo_details.name: ", repo_details.name);
+                    repoNamesArray.push(repo_details.name);
+                }
             });
     }
 

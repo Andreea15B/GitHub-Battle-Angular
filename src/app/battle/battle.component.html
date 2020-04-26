@@ -20,9 +20,20 @@
                         <h3>{{playerOneInfo.name}}</h3>
                         <p>Username: {{playerOneInfo.login}}</p>
                         <button *ngIf="in_battle==false" class="battle-btn" (click)="resetFirstUser()">Reset</button>
-                        <p *ngIf="in_battle==true">Followers: {{playerOneInfo.followers}}</p>
-                        <p *ngIf="in_battle==true">Public repositories: {{playerOneInfo.public_repos}}</p>
-                        <p *ngIf="in_battle==true">Score: {{ player1_score }}</p>
+
+                        <div class="details" *ngIf="in_battle==true">
+
+                            <p>Followers: {{playerOneInfo.followers}}</p>
+                            <p>Public repositories: {{playerOneInfo.public_repos}}</p>
+                            <br>
+                            <span>
+                                <h4>Repositories:</h4>
+                                <p *ngFor="let repo of repoNames1">{{ repo }}</p>
+                            </span>
+                            <br>
+                            <h3>Score: {{ player1_score }}</h3>
+
+                        </div>
                     </div>
                 </ng-container>
                 <div *ngIf="winner==1" class="winner">WINNER</div>
@@ -67,9 +78,20 @@
                         <h3>{{playerTwoInfo.name}}</h3>
                         <p>Username: {{playerTwoInfo.login}}</p>
                         <button *ngIf="in_battle==false" class="battle-btn" (click)="resetSecondUser()">Reset</button>
-                        <p *ngIf="in_battle==true">Followers: {{playerTwoInfo.followers}}</p>
-                        <p *ngIf="in_battle==true">Public repositories: {{playerTwoInfo.public_repos}}</p>
-                        <p *ngIf="in_battle==true">Score: {{ player2_score }}</p>
+
+                        <div class="details" *ngIf="in_battle==true">
+
+                            <p>Followers: {{playerTwoInfo.followers}}</p>
+                            <p>Public repositories: {{playerTwoInfo.public_repos}}</p>
+                            <br>
+                            <span>
+                                <h4>Repositories:</h4>
+                                <p *ngFor="let repo of repoNames2">{{ repo }}</p>
+                            </span>
+                            <br>
+                            <h3>Score: {{ player2_score }}</h3>
+
+                        </div>
 
                     </div>
                 </ng-container>

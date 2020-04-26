@@ -29,6 +29,10 @@
     align-self: center;
 }
 
+h4 {
+    color: #1bab83;
+}
+
 .playerBox {
     display: flex;
     flex-direction: row-reverse;
@@ -93,4 +97,9 @@ p, h3 {
 
 .errorMessage {
     margin: 4.2em 1.6em 2.2em;
+}
+
+.details {
+    text-align: left;
+    padding: 4% 0 0 10%;
 }
