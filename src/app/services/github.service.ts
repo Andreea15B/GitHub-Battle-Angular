@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { IUser } from '../models/user.model';
-import { tap, delay, map, catchError } from 'rxjs/operators';
+import { tap, delay, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,25 +19,16 @@ export class GithubService {
 
   constructor(private http: HttpClient) {}
 
-
-  public getUserOne(username: string): Observable<IUser> {
-    this.isLoading1$.next(true);
+  public getUser(username: string, whichUser: number): Observable<IUser> {
+    if (whichUser == 1) this.isLoading1$.next(true);
+    else this.isLoading2$.next(true);
     return this.http.get<IUser>(`https://api.github.com/users/${username}${this.params}`)
       .pipe(
         delay(400),
-        tap(() => this.isLoading1$.next(false)),
-        map((userInfo: IUser) => {
-          return userInfo;
-        })
-      );
-  }
-
-  public getUserTwo(username: string): Observable<IUser> {
-    this.isLoading2$.next(true);
-    return this.http.get<IUser>(`https://api.github.com/users/${username}${this.params}`)
-      .pipe(
-        delay(400),
-        tap(() => this.isLoading2$.next(false)),
+        tap(() => {
+          if (whichUser == 1) this.isLoading1$.next(false);
+          else this.isLoading2$.next(false);
+        }),
         map((userInfo: IUser) => {
           return userInfo;
         })
@@ -45,7 +36,12 @@ export class GithubService {
   }
 
   public getRepos(username: string) {
-    return this.http.get(`https://api.github.com/users/${username}/repos${this.params}&per_page=100`);
+    return this.http.get(`https://api.github.com/users/${username}/repos${this.params}&per_page=100`)
+    .pipe(
+      map((data) => { 
+        return data;
+      })
+    );
   }
   
 }

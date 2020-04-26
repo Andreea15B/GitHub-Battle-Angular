@@ -6,4 +6,7 @@ export interface IUser {
     followers: number;
     avatar_url: string;
     status: number;
+    bio: string;
+    location: string;
+    blog: string;
 }

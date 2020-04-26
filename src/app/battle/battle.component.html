@@ -1,3 +1,7 @@
+<div id="battle-btn-div">
+    <button class="battle-btn" *ngIf="in_battle==true" (click)="refresh()">Go to start!</button>
+</div>
+
 <div class="players">
     <div class="forCorners" [ngStyle]="{'background-color': buttonColor1}">
         <div class="playerBox">
@@ -23,15 +27,20 @@
 
                         <div class="details" *ngIf="in_battle==true">
 
+                            <h3>Score: {{ player1_score }}</h3>
+                            <br>
+                            <p *ngIf="playerOneInfo.location">Location: {{playerOneInfo.location}}</p>
+                            <p *ngIf="playerOneInfo.blog">Blog: {{playerOneInfo.blog}} </p>
+                            <p *ngIf="playerOneInfo.bio">Bio: {{playerOneInfo.bio}}</p>
                             <p>Followers: {{playerOneInfo.followers}}</p>
                             <p>Public repositories: {{playerOneInfo.public_repos}}</p>
+                            <p>Stars: {{ stars1 }}</p>
+                            <p>Most used language: {{ language1 }}</p>
                             <br>
                             <span>
                                 <h4>Repositories:</h4>
                                 <p *ngFor="let repo of repoNames1">{{ repo }}</p>
                             </span>
-                            <br>
-                            <h3>Score: {{ player1_score }}</h3>
 
                         </div>
                     </div>
@@ -81,15 +90,21 @@
 
                         <div class="details" *ngIf="in_battle==true">
 
+                            <h3>Score: {{ player2_score }}</h3>
+                            <br>
+                            <p *ngIf="playerTwoInfo.location">Location: {{playerTwoInfo.location}}</p>
+                            <p *ngIf="playerTwoInfo.blog">Blog: {{playerTwoInfo.blog}} </p>
+                            <p *ngIf="playerTwoInfo.bio">Bio: {{playerTwoInfo.bio}}</p>
                             <p>Followers: {{playerTwoInfo.followers}}</p>
                             <p>Public repositories: {{playerTwoInfo.public_repos}}</p>
+                            <p>Stars: {{ stars2 }}</p>
+                            <p>Most used language: {{ language2 }}</p>
                             <br>
                             <span>
                                 <h4>Repositories:</h4>
                                 <p *ngFor="let repo of repoNames2">{{ repo }}</p>
                             </span>
                             <br>
-                            <h3>Score: {{ player2_score }}</h3>
 
                         </div>
 
@@ -112,5 +127,5 @@
 
 <div id="battle-btn-div">
     <button class="battle-btn" *ngIf="gotPlayerOne && gotPlayerTwo && in_battle==false" (click)="battle()">Battle!</button>
-    <button class="battle-btn" *ngIf="in_battle==true" (click)="refresh()">Go to start!</button>
+    <!-- <button class="battle-btn" *ngIf="in_battle==true" (click)="refresh()">Go to start!</button> -->
 </div>
