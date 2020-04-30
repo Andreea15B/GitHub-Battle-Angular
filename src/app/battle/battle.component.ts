@@ -36,6 +36,8 @@ export class BattleComponent implements OnInit {
     language2Array: number[] = [];
     language1: string;
     language2: string;
+    showShortDescription: boolean = true;
+    showShortDescription2: boolean = true;
 
     constructor(private githubService: GithubService) {}
 
@@ -97,7 +99,6 @@ export class BattleComponent implements OnInit {
                     }
                     else this.language1Array[repo_details.language] += 1; 
                 }
-                console.log("language1Array: ", this.language1Array);
                 let aux = 0;
                 for(let language in this.language1Array) {
                     if(language != "null" && this.language1Array[language] > aux) {
@@ -119,7 +120,6 @@ export class BattleComponent implements OnInit {
                     }
                     else this.language2Array[repo_details.language] += 1; 
                 }
-                console.log("language2Array: ", this.language2Array);
                 let aux = 0;
                 for(let language in this.language2Array) {
                     if(language != "null" && this.language2Array[language] > aux) {
@@ -155,6 +155,14 @@ export class BattleComponent implements OnInit {
     resetSecondUser() : void {
         this.gotPlayerTwo = false;
         this.errorUser2 = false;
+    }
+
+    alterDescriptionText() {
+        this.showShortDescription = !this.showShortDescription;
+    }
+
+    alterDescriptionText2() {
+        this.showShortDescription2 = !this.showShortDescription2;
     }
 
     public ngOnDestroy(): void {

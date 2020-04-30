@@ -20,6 +20,7 @@
             <ng-container *ngIf="!isLoading1; else loadingState">
                 <ng-container *ngIf="!errorUser1; else errorMessage1">
                     <div *ngIf="gotPlayerOne" class="userInfo">
+                        
                         <img src={{playerOneInfo.avatar_url}} class="avatar">
                         <h3>{{playerOneInfo.name}}</h3>
                         <p>Username: {{playerOneInfo.login}}</p>
@@ -30,7 +31,7 @@
                             <h3>Score: {{ player1_score }}</h3>
                             <br>
                             <p *ngIf="playerOneInfo.location">Location: {{playerOneInfo.location}}</p>
-                            <p *ngIf="playerOneInfo.blog">Blog: {{playerOneInfo.blog}} </p>
+                            <p *ngIf="playerOneInfo.blog">Blog: <a href={{playerOneInfo.blog}}>{{playerOneInfo.blog}}</a> </p>
                             <p *ngIf="playerOneInfo.bio">Bio: {{playerOneInfo.bio}}</p>
                             <p>Followers: {{playerOneInfo.followers}}</p>
                             <p>Public repositories: {{playerOneInfo.public_repos}}</p>
@@ -39,7 +40,13 @@
                             <br>
                             <span>
                                 <h4>Repositories:</h4>
-                                <p *ngFor="let repo of repoNames1">{{ repo }}</p>
+
+                                <div [ngClass]="{'show-less': showShortDescription}">
+                                    <p *ngFor="let repo of repoNames1">{{ repo }}</p>
+                                </div>
+                                <button class="show-btn" type="button" (click)="alterDescriptionText()">
+                                    {{ showShortDescription ? 'SHOW ALL': 'SHOW LESS' }}
+                                </button>
                             </span>
 
                         </div>
@@ -93,7 +100,7 @@
                             <h3>Score: {{ player2_score }}</h3>
                             <br>
                             <p *ngIf="playerTwoInfo.location">Location: {{playerTwoInfo.location}}</p>
-                            <p *ngIf="playerTwoInfo.blog">Blog: {{playerTwoInfo.blog}} </p>
+                            <p *ngIf="playerTwoInfo.blog">Blog: <a href={{playerTwoInfo.blog}}>{{playerTwoInfo.blog}}</a> </p>
                             <p *ngIf="playerTwoInfo.bio">Bio: {{playerTwoInfo.bio}}</p>
                             <p>Followers: {{playerTwoInfo.followers}}</p>
                             <p>Public repositories: {{playerTwoInfo.public_repos}}</p>
@@ -102,7 +109,13 @@
                             <br>
                             <span>
                                 <h4>Repositories:</h4>
-                                <p *ngFor="let repo of repoNames2">{{ repo }}</p>
+
+                                <div [ngClass]="{'show-less': showShortDescription2}">
+                                    <p *ngFor="let repo of repoNames2">{{ repo }}</p>
+                                </div>
+                                <button class="show-btn" type="button" (click)="alterDescriptionText2()">
+                                    {{ showShortDescription2 ? 'SHOW ALL': 'SHOW LESS' }}
+                                </button>
                             </span>
                             <br>
 
@@ -127,5 +140,4 @@
 
 <div id="battle-btn-div">
     <button class="battle-btn" *ngIf="gotPlayerOne && gotPlayerTwo && in_battle==false" (click)="battle()">Battle!</button>
-    <!-- <button class="battle-btn" *ngIf="in_battle==true" (click)="refresh()">Go to start!</button> -->
 </div>

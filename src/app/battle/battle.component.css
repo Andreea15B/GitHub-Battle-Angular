@@ -1,5 +1,6 @@
 .players {
-    margin: 30px 350px;
+    /* margin: 30px 350px; */
+    margin: 1% 10%;
     display: flex;
     justify-content: space-around;
     background-color: rgba(11, 13, 24, 0.6);
@@ -36,14 +37,13 @@ h4 {
 .playerBox {
     display: flex;
     flex-direction: row-reverse;
-    align-items: center;
     padding: 30px 30px;
+    justify-content: center;
 }
 
 .forCorners {
     border-radius: 20px;
     flex-grow: 1;
-    min-width: 50%;
 }
 
 label {
@@ -101,5 +101,36 @@ p, h3 {
 
 .details {
     text-align: left;
-    padding: 4% 0 0 10%;
+    padding: 4% 5% 0 10%;
+}
+
+a {
+    text-decoration: none;
+    color: #3ca4ff;
+}
+
+@media only screen and (max-width: 1000px) {
+    .players {
+        flex-direction: column;
+        align-items: center;
+    }
+    .battle-btn {
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+}
+
+.show-less {
+    height: 4rem;
+    overflow: hidden;
+    padding-bottom: 5%;
+}
+
+.show-btn {
+    color: white;
+    background-color: #188c6c;
+    border: none;
+    border-radius: 20px;
+    padding: 2% 4%;
+    font-weight: 600;
 }

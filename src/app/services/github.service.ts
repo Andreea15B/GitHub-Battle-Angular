@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { IUser } from '../models/user.model';
 import { tap, delay, map } from 'rxjs/operators';
 
@@ -13,16 +13,21 @@ export class GithubService {
   public isLoading1$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public isLoading2$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  private CLIENT_ID = "c2a5e9744aab484ede51";
-  private CLIENT_SECRET = "97a748734cde8dba02b32aa6373dadd1f97d32ef";
-  private params = `?client_id=${this.CLIENT_ID}&client_secret=${this.CLIENT_SECRET}`;
+  private ACCESS_TOKEN ="1688f098354af4d33fce90310e12ed15c0760c72";
+
+  config = {headers: {
+    'Authorization': `Bearer ${this.ACCESS_TOKEN}`,
+    'Accept': 'application/json;odata=verbose'
+    }
+  };
 
   constructor(private http: HttpClient) {}
 
   public getUser(username: string, whichUser: number): Observable<IUser> {
     if (whichUser == 1) this.isLoading1$.next(true);
     else this.isLoading2$.next(true);
-    return this.http.get<IUser>(`https://api.github.com/users/${username}${this.params}`)
+
+    return this.http.get<IUser>(`https://api.github.com/users/${username}`, this.config)
       .pipe(
         delay(400),
         tap(() => {
@@ -36,12 +41,7 @@ export class GithubService {
   }
 
   public getRepos(username: string) {
-    return this.http.get(`https://api.github.com/users/${username}/repos${this.params}&per_page=100`)
-    .pipe(
-      map((data) => { 
-        return data;
-      })
-    );
+    return this.http.get(`https://api.github.com/users/${username}/repos?per_page=100`, this.config);
   }
   
 }
