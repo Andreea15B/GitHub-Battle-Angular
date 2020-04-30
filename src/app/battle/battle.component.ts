@@ -38,6 +38,8 @@ export class BattleComponent implements OnInit {
     language2: string;
     showShortDescription: boolean = true;
     showShortDescription2: boolean = true;
+    nr_commits1: number = 0;
+    nr_commits2: number = 0;
 
     constructor(private githubService: GithubService) {}
 
@@ -58,7 +60,6 @@ export class BattleComponent implements OnInit {
                     this.gotPlayerOne = true;
                     this.errorUser1 = false;
                 }
-                this.player1_score = this.playerOneInfo.followers*1 + this.playerOneInfo.public_repos*4 + this.stars1*5;
             },
             error => {
                 this.errorUser1 = true;
@@ -97,7 +98,7 @@ export class BattleComponent implements OnInit {
                     if(this.language1Array[repo_details.language] == null) {
                         this.language1Array[repo_details.language] = 1;
                     }
-                    else this.language1Array[repo_details.language] += 1; 
+                    else this.language1Array[repo_details.language] += 1;
                 }
                 let aux = 0;
                 for(let language in this.language1Array) {
@@ -106,6 +107,8 @@ export class BattleComponent implements OnInit {
                         this.language1 = language;
                     }
                 }
+
+                this.getCommitsNr1(username);
             });
     }
 
@@ -127,11 +130,45 @@ export class BattleComponent implements OnInit {
                         this.language2 = language;
                     }
                 }
+
+                this.getCommitsNr2(username);
             });
+    }
+
+    public getCommitsNr1(username: string) {
+        for(let i=0; i<this.repoNames1.length; i++) {
+            this.githubService.getCommitsInfo(username, this.repoNames1[i])
+                .subscribe((res_commits_info: any) => {
+                    for(let i in res_commits_info) {
+                        if(res_commits_info[i].author.login == username) {
+                            this.nr_commits1 += res_commits_info[i].total;
+                            break;
+                        }
+                    }
+                });
+        }
+    }
+
+    public getCommitsNr2(username: string) {
+        for(let i=0; i<this.repoNames2.length; i++) {
+            this.githubService.getCommitsInfo(username, this.repoNames2[i])
+                .subscribe((res_commits_info: any) => {
+                    for(let i in res_commits_info) {
+                        if(res_commits_info[i].author.login == username) {
+                            this.nr_commits2 += res_commits_info[i].total;
+                            break;
+                        }
+                    }
+                });
+        }
     }
 
     battle() {
         this.in_battle = true;
+
+        this.player1_score = this.playerOneInfo.followers*0.5 + this.playerOneInfo.public_repos*2.5 + this.stars1*3 + this.nr_commits1 * 4;
+        this.player2_score = this.playerTwoInfo.followers*0.5 + this.playerTwoInfo.public_repos*2.5 + this.stars2*3 + this.nr_commits2 * 4;
+
         if (this.player1_score > this.player2_score) {
             this.winner = 1;
             this.buttonColor1 = '#222';

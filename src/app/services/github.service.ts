@@ -43,6 +43,10 @@ export class GithubService {
   public getRepos(username: string) {
     return this.http.get(`https://api.github.com/users/${username}/repos?per_page=100`, this.config);
   }
+
+  public getCommitsInfo(username: string, repo: string) {
+    return this.http.get(`https://api.github.com/repos/${username}/${repo}/stats/contributors`, this.config);
+  }
   
 }
 
