@@ -1,5 +1,4 @@
 .players {
-    /* margin: 30px 350px; */
     margin: 1% 10%;
     display: flex;
     justify-content: space-around;
@@ -133,4 +132,5 @@ a {
     border-radius: 20px;
     padding: 2% 4%;
     font-weight: 600;
+    cursor: pointer;
 }
