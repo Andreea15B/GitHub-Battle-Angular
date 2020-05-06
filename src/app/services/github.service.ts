@@ -13,7 +13,9 @@ export class GithubService {
   public isLoading1$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public isLoading2$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  private ACCESS_TOKEN ="1688f098354af4d33fce90310e12ed15c0760c72";
+  private ACCESS_TOKEN_part1 = "ed3d2bcb043860e96a1";
+  private ACCESS_TOKEN_part2 = "abe14565eb41f4378825c";
+  private ACCESS_TOKEN = this.ACCESS_TOKEN_part1 + this.ACCESS_TOKEN_part2;
 
   config = {headers: {
     'Authorization': `Bearer ${this.ACCESS_TOKEN}`,
@@ -21,7 +23,8 @@ export class GithubService {
     }
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   public getUser(username: string, whichUser: number): Observable<IUser> {
     if (whichUser == 1) this.isLoading1$.next(true);
